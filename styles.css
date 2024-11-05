@@ -32,6 +32,10 @@ header ul {
     font-size: 1.5rem;
 }
 
+header ul:hover {
+    cursor: pointer;
+}
+
 .main .spacing {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
