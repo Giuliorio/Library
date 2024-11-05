@@ -33,12 +33,20 @@ function displayBooks() {
         card.dataset.key = key  
         card.appendChild(createElement(title, 'title'))
         card.appendChild(createElement(author, 'author'))
-        card.appendChild(createElement(read ? 'Read' : 'Not Read', 'read', 'button'))
 
+        const readButton = createElement(read ? 'Read' : 'Not Read', 'read', 'button')
         const removeBookButton = createElement('Remove Book', 'remove', 'button')
+        card.appendChild(readButton)
         card.appendChild(removeBookButton)
 
-        removeBookButton.addEventListener('click', (e) => {
+        readButton.addEventListener('click', (e) => {
+            const book = myLibrary[myLibrary.findIndex(element => element.key === card.dataset.key, 1)]
+            book.read = !book.read
+
+            displayBooks()
+        })
+
+        removeBookButton.addEventListener('click', () => {
             myLibrary.splice(myLibrary.findIndex((element) => element.key === card.dataset.key), 1)
             displayBooks()
         })
@@ -69,8 +77,6 @@ form.addEventListener('submit', (e) => {
     const title = formData.get('book-title')
     const author = formData.get('book-author')
     const read = formData.has('book-read')
-
-    console.log(read)
 
     addBookToLibrary(title, author, read)
     displayBooks()
