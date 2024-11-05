@@ -57,9 +57,12 @@ form.addEventListener('submit', (e) => {
     const formData = new FormData(form)
     const title = formData.get('book-title')
     const author = formData.get('book-author')
-    const read = formData.get('read')
+    const read = formData.has('book-read')
+
+    console.log(read)
 
     addBookToLibrary(title, author, read)
+    displayBooks()
     dialog.close()
 })
 
