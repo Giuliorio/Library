@@ -37,6 +37,8 @@ function displayBooks() {
         return card
     }
 
+    cardSection.innerHTML = ''
+
     myLibrary.forEach(book => {
         cardSection.appendChild(createCard(book.title, book.author, book.read))
     })
