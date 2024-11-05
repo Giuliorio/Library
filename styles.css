@@ -1,3 +1,7 @@
+body {
+    background-color: #EEE;
+}
+
 header {
     background-color: #fff;
     box-shadow: 0px 4px 8px hsl(0deg 0% 0% / 0.20);
@@ -6,10 +10,12 @@ header {
 }
 
 .spacing {
-    max-width: 1000px;
+    max-width: 1000px;  
     margin-inline: auto;
     padding: 2rem 0;
+}
 
+.header .spacing {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,4 +23,50 @@ header {
 
 header ul {
     list-style-type: none;
+}
+
+.main .spacing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+    gap: 3rem;
+}
+
+.card {
+    background-color: #fff;
+    
+    padding: 1rem 2rem;
+
+    width: 300px;
+    max-height: 150px;
+
+    border-radius: 15px;
+    box-shadow: 4px 4px 8px hsl(0deg 0% 0% / 0.20);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card .title {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.card .author {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card .read {
+    border: 1px solid #000;
+    border-radius: 15px;
+
+    padding: .25rem 1.25rem;
+}
+
+.card .read:hover {
+    background-color: #EEE;
+    cursor: pointer;
 }

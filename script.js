@@ -1,10 +1,9 @@
 const myLibrary = []
-const body = document.querySelector('body')
+const cardSection = document.querySelector('.main .spacing')
 
-function Book(title, author, pages, read) {
+function Book(title, author, read) {
     this.title = title
     this.author = author
-    this.pages = pages
     this.read = read
 }
 
@@ -14,25 +13,29 @@ function addBookToLibrary(title, author, read) {
 }
 
 function displayBooks() {
-    const createCard = (title, author) => {
+    const createCard = (title, author, read) => {
         const card = document.createElement('div')
         const titleText = document.createElement('p')
         const authorText = document.createElement('p')
+        const readDiv = document.createElement('div')
 
         card.appendChild(titleText)
         card.appendChild(authorText)
+        card.appendChild(readDiv)
 
         card.classList.add('card')
         titleText.textContent = title
         titleText.classList.add('title')
         authorText.textContent = author
         authorText.classList.add('author')
+        readDiv.textContent = read
+        readDiv.classList.add('read')
 
         return card
     }
 
     myLibrary.forEach(book => {
-        body.appendChild(createCard(book.title, book.author, book.read))
+        cardSection.appendChild(createCard(book.title, book.author, book.read))
     })
 }
 
