@@ -75,6 +75,7 @@ form.addEventListener('submit', (e) => {
     addBookToLibrary(title, author, read)
     displayBooks()
     dialog.close()
+    form.reset()
 })
 
 dialog.addEventListener('click', (e) => {
