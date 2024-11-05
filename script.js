@@ -31,7 +31,7 @@ function displayBooks() {
         titleText.classList.add('title')
         authorText.textContent = author
         authorText.classList.add('author')
-        readDiv.textContent = read
+        readDiv.textContent = read ? 'Read' : 'Not Read'
         readDiv.classList.add('read')
 
         return card
