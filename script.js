@@ -1,5 +1,6 @@
 const myLibrary = []
 const cardSection = document.querySelector('.main .spacing')
+const addBookButton = document.querySelector('.add-book')
 
 function Book(title, author, read) {
     this.title = title
