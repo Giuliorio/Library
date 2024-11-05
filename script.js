@@ -4,14 +4,17 @@ const addBookButton = document.querySelector('.add-book')
 const form = document.querySelector('dialog form')
 const dialog = document.querySelector('dialog')
 
+let id = 0
+
 function Book(title, author, read) {
     this.title = title
     this.author = author
     this.read = read
+    this.key = id++ + ''
 }
 
-function addBookToLibrary(title, author, read) {
-    const book = new Book(title, author, read)
+function addBookToLibrary(title, author, read, key) {
+    const book = new Book(title, author, read, key)
     myLibrary.push(book)
 }
 
@@ -25,12 +28,20 @@ function displayBooks() {
         return element
     }
 
-    const createCard = (title, author, read) => {
+    const createCard = (title, author, read, key) => {
         const card = createElement(null, 'card')
+        card.dataset.key = key  
         card.appendChild(createElement(title, 'title'))
         card.appendChild(createElement(author, 'author'))
         card.appendChild(createElement(read ? 'Read' : 'Not Read', 'read', 'button'))
-        card.appendChild(createElement('Remove Book', 'remove', 'button'))
+
+        const removeBookButton = createElement('Remove Book', 'remove', 'button')
+        card.appendChild(removeBookButton)
+
+        removeBookButton.addEventListener('click', (e) => {
+            myLibrary.splice(myLibrary.findIndex((element) => element.key === card.dataset.key), 1)
+            displayBooks()
+        })
 
         return card
     }
@@ -38,7 +49,7 @@ function displayBooks() {
     cardSection.innerHTML = ''
 
     myLibrary.forEach(book => {
-        cardSection.appendChild(createCard(book.title, book.author, book.read))
+        cardSection.appendChild(createCard(book.title, book.author, book.read, book.key))
     })
 }
 
