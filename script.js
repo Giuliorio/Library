@@ -16,23 +16,21 @@ function addBookToLibrary(title, author, read) {
 }
 
 function displayBooks() {
+    const createElement = (text, ...classNames) => {
+        const element = document.createElement('div')
+
+        if (text) element.textContent = text
+        if (classNames.length) element.classList.add(...classNames)
+
+        return element
+    }
+
     const createCard = (title, author, read) => {
-        const card = document.createElement('div')
-        const titleText = document.createElement('p')
-        const authorText = document.createElement('p')
-        const readDiv = document.createElement('div')
-
-        card.appendChild(titleText)
-        card.appendChild(authorText)
-        card.appendChild(readDiv)
-
-        card.classList.add('card')
-        titleText.textContent = title
-        titleText.classList.add('title')
-        authorText.textContent = author
-        authorText.classList.add('author')
-        readDiv.textContent = read ? 'Read' : 'Not Read'
-        readDiv.classList.add('read')
+        const card = createElement(null, 'card')
+        card.appendChild(createElement(title, 'title'))
+        card.appendChild(createElement(author, 'author'))
+        card.appendChild(createElement(read ? 'Read' : 'Not Read', 'read', 'button'))
+        card.appendChild(createElement('Remove Book', 'remove', 'button'))
 
         return card
     }
