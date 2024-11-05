@@ -1,5 +1,6 @@
 body {
     background-color: #EEE;
+    font-family: "Noto Sans", sans-serif;
 }
 
 header {
@@ -21,8 +22,14 @@ header .spacing {
     align-items: center;
 }
 
+header .logo {
+    font-family: "Noto Sans Mono", monospace;
+    font-weight: 800;
+}
+
 header ul {
     list-style-type: none;
+    font-size: 1.5rem;
 }
 
 .main .spacing {
@@ -51,7 +58,9 @@ header ul {
 }
 
 .card .title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+
     margin-bottom: -0.75rem;
 }
 
