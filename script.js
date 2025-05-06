@@ -1,92 +1,105 @@
-const myLibrary = []
-const cardSection = document.querySelector('.main .spacing')
-const addBookButton = document.querySelector('.add-book')
-const form = document.querySelector('dialog form')
-const dialog = document.querySelector('dialog')
+const myLibrary = [];
+const cardSection = document.querySelector('.main .spacing');
+const addBookButton = document.querySelector('.add-book');
+const form = document.querySelector('dialog form');
+const dialog = document.querySelector('dialog');
 
-let id = 0
+let id = 0;
 
 class Book {
-    constructor(title, author, read) {
-        this.title = title;
-        this.author = author;
-        this.read = read;
-    }
+  constructor(title, author, read) {
+    this.title = title;
+    this.author = author;
+    this.read = read;
+    this.key = crypto.randomUUID();
+  }
 }
 
-function addBookToLibrary(title, author, read, key) {
-    const book = new Book(title, author, read, key)
-    myLibrary.push(book)
+function addBookToLibrary(title, author, read) {
+  const book = new Book(title, author, read);
+  myLibrary.push(book);
 }
 
 function displayBooks() {
-    const createElement = (text, ...classNames) => {
-        const element = document.createElement('div')
+  const createElement = (text, ...classNames) => {
+    const element = document.createElement('div');
 
-        if (text) element.textContent = text
-        if (classNames.length) element.classList.add(...classNames)
+    if (text) element.textContent = text;
+    if (classNames.length) element.classList.add(...classNames);
 
-        return element
-    }
+    return element;
+  };
 
-    const createCard = (title, author, read, key) => {
-        const card = createElement(null, 'card')
-        card.dataset.key = key  
-        card.appendChild(createElement(title, 'title'))
-        card.appendChild(createElement(author, 'author'))
+  const createCard = (title, author, read, key) => {
+    const card = createElement(null, 'card');
+    card.dataset.key = key;
+    card.appendChild(createElement(title, 'title'));
+    card.appendChild(createElement(author, 'author'));
 
-        const readButton = createElement(read ? 'Read' : 'Not Read', 'read', 'button')
-        const removeBookButton = createElement('Remove Book', 'remove', 'button')
-        card.appendChild(readButton)
-        card.appendChild(removeBookButton)
+    const readButton = createElement(
+      read ? 'Read' : 'Not Read',
+      'read',
+      'button'
+    );
+    const removeBookButton = createElement('Remove Book', 'remove', 'button');
+    card.appendChild(readButton);
+    card.appendChild(removeBookButton);
 
-        readButton.addEventListener('click', (e) => {
-            const book = myLibrary[myLibrary.findIndex(element => element.key === card.dataset.key, 1)]
-            book.read = !book.read
+    readButton.addEventListener('click', (e) => {
+      const book =
+        myLibrary[
+          myLibrary.findIndex((element) => element.key === card.dataset.key, 1)
+        ];
+      book.read = !book.read;
 
-            displayBooks()
-        })
+      displayBooks();
+    });
 
-        removeBookButton.addEventListener('click', () => {
-            myLibrary.splice(myLibrary.findIndex((element) => element.key === card.dataset.key), 1)
-            displayBooks()
-        })
+    removeBookButton.addEventListener('click', () => {
+      myLibrary.splice(
+        myLibrary.findIndex((element) => element.key === card.dataset.key),
+        1
+      );
+      displayBooks();
+    });
 
-        return card
-    }
+    return card;
+  };
 
-    cardSection.innerHTML = ''
+  cardSection.innerHTML = '';
 
-    myLibrary.forEach(book => {
-        cardSection.appendChild(createCard(book.title, book.author, book.read, book.key))
-    })
+  myLibrary.forEach((book) => {
+    cardSection.appendChild(
+      createCard(book.title, book.author, book.read, book.key)
+    );
+  });
 }
 
-addBookToLibrary('Discipline is Destiny', 'Ryan Holiday', true)
-addBookToLibrary('The Obstacle is the Way', 'Ryan Holiday', false)
-addBookToLibrary('Meditations', 'Marcus Aurelius', false)
-displayBooks()
+addBookToLibrary('Discipline is Destiny', 'Ryan Holiday', true);
+addBookToLibrary('The Obstacle is the Way', 'Ryan Holiday', false);
+addBookToLibrary('Meditations', 'Marcus Aurelius', false);
+displayBooks();
 
 addBookButton.addEventListener('click', () => {
-    dialog.showModal()
-})
+  dialog.showModal();
+});
 
 form.addEventListener('submit', (e) => {
-    e.preventDefault()
+  e.preventDefault();
 
-    const formData = new FormData(form)
-    const title = formData.get('book-title')
-    const author = formData.get('book-author')
-    const read = formData.has('book-read')
+  const formData = new FormData(form);
+  const title = formData.get('book-title');
+  const author = formData.get('book-author');
+  const read = formData.has('book-read');
 
-    addBookToLibrary(title, author, read)
-    displayBooks()
-    dialog.close()
-    form.reset()
-})
+  addBookToLibrary(title, author, read);
+  displayBooks();
+  dialog.close();
+  form.reset();
+});
 
 dialog.addEventListener('click', (e) => {
-    if (e.target === dialog) {
-        dialog.close()
-    }
-})
+  if (e.target === dialog) {
+    dialog.close();
+  }
+});
