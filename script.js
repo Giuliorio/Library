@@ -4,8 +4,6 @@ const addBookButton = document.querySelector('.add-book');
 const form = document.querySelector('dialog form');
 const dialog = document.querySelector('dialog');
 
-let id = 0;
-
 class Book {
   constructor(title, author, read) {
     this.title = title;
